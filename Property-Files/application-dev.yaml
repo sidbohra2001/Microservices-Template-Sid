@@ -1,0 +1,36 @@
+server:
+  port: <port>
+  servlet:
+    context-path: /<application>
+
+#Spring
+spring:
+  application:
+    name: <application>
+  datasource:
+    url: jdbc:mysql://localhost:3306/<application>-db?createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+#Eureka
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:9999/eureka/
+  instance:
+    preferIpAddress: true
+
+#Logging
+logging:
+  level:
+    com:
+      hackathon:
+        - INFO
+        - ERROR

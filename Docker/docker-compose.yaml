@@ -1,0 +1,50 @@
+version: '3'
+services:
+  mysql-container:
+    image: 'mysql:latest'
+    ports:
+      - '33061:3306'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'user-db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+  eureka-container:
+    restart: always
+    build: ./eureka
+    ports:
+      - '9999:9999'
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+  authentication:
+    depends_on:
+      - mysql-container
+      - eureka-container
+    restart: always
+    build: ./authentication
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-container:3306/user-db?useSSL=false&allowPublicKeyRetrieval=true'
+  gateway:
+    depends_on:
+      - mysql-container
+      - eureka-container
+      - authentication
+    restart: always
+    build: ./gateway
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - '8888:8888'
+  <application>:
+    depends_on:
+      - mysql-container
+      - eureka-container
+      - authentication
+      - gateway
+    restart: always
+    build: ./<application>
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-container:3306/<application>-db?useSSL=false&allowPublicKeyRetrieval=true'

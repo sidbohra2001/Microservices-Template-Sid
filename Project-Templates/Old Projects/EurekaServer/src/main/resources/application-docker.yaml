@@ -1,0 +1,25 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: Eureka
+  boot:
+    admin:
+      client:
+        url: http://admin-container:7777
+eureka:
+  instance:
+    hostname: eureka-container
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://eureka-container:9999/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-details: always
