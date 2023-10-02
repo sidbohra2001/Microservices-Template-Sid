@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: gateway-service
+    name: gateway
   cloud:
     gateway:
       discovery:
@@ -16,24 +16,17 @@ spring:
           uri: lb://auth-service/
           predicates:
             - Path=/auth/**
-        - id: category-service
-          uri: lb://category-service/
+        - id: application
+          uri: lb://application/
           predicates:
-            - Path=/category/**
+            - Path=/app/**
           filters:
             - AuthenticationFilter
-        - id: ad-service
-          uri: lb://ad-service/
-          predicates:
-            - Path=/ad/**
-          filters:
-            - AuthenticationFilter
-
 
 eureka:
   client:
-    fetch-registry: true
     register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://localhost:9999/eureka/
   instance:

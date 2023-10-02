@@ -1,7 +1,0 @@
-com\booking\gateway\filter\RouteValidator.class
-com\booking\gateway\filter\AuthenticationFilter.class
-com\booking\gateway\exceptions\UnauthorizedUserException.class
-com\booking\gateway\util\JwtUtil.class
-com\booking\gateway\exceptionhandler\GatewayExceptionHandler.class
-com\booking\gateway\filter\AuthenticationFilter$Config.class
-com\booking\gateway\GatewayApplication.class

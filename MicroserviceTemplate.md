@@ -19,7 +19,7 @@ import lombok.*;
 @Entity
 
 @Id
-@GeneratedValue(strategy = GeneratedType.IDENTITY)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 # Swagger Annotations for DTO : 
 
